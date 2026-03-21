@@ -39,7 +39,7 @@ CREATE TABLE approvals (
 -- Insert completely dummy initial data for easy testing
 -- password for all: password123 (we typically use bcrypt, so I'll generate the hash for 'password123' here: $2b$10$wTf/0K1RAsXW.4w6/A24rOFZgBwK6W6n1WIf3w/jI9Bv/u8U8JvRe)
 INSERT INTO users (name, email, password, role) VALUES 
-('Alice Student', 'student@test.com', '$2b$10$wTf/0K1RAsXW.4w6/A24rOFZgBwK6W6n1WIf3w/jI9Bv/u8U8JvRe', 'student'),
-('Bob Faculty', 'faculty@test.com', '$2b$10$wTf/0K1RAsXW.4w6/A24rOFZgBwK6W6n1WIf3w/jI9Bv/u8U8JvRe', 'faculty'),
-('Charlie HOD', 'hod@test.com', '$2b$10$wTf/0K1RAsXW.4w6/A24rOFZgBwK6W6n1WIf3w/jI9Bv/u8U8JvRe', 'hod'),
-('Dave Admin', 'admin@test.com', '$2b$10$wTf/0K1RAsXW.4w6/A24rOFZgBwK6W6n1WIf3w/jI9Bv/u8U8JvRe', 'admin');
+('Alice Student', 'student@test.com', '$2b$10$NiybK7x/pfHxN3Zmi0.zGOxcnh6LZp6xDp5z5V8rqaBFvBXN2FIqK', 'student'),
+('Bob Faculty', 'faculty@test.com', '$2b$10$NiybK7x/pfHxN3Zmi0.zGOxcnh6LZp6xDp5z5V8rqaBFvBXN2FIqK', 'faculty'),
+('Charlie HOD', 'hod@test.com', '$2b$10$NiybK7x/pfHxN3Zmi0.zGOxcnh6LZp6xDp5z5V8rqaBFvBXN2FIqK', 'hod'),
+('Dave Admin', 'admin@test.com', '$2b$10$NiybK7x/pfHxN3Zmi0.zGOxcnh6LZp6xDp5z5V8rqaBFvBXN2FIqK', 'admin');

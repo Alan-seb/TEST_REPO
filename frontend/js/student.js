@@ -72,9 +72,23 @@ async function loadLeaveHistory() {
                 <td><div style="max-width:200px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${leave.reason}">${leave.reason}</div></td>
                 <td>${formatStatus(leave.status)}</td>
                 <td>${formatDate(leave.created_at)}</td>
+                <td>
+                    ${leave.status === 'pending_faculty' ? `<button class="btn btn-sm btn-danger" onclick="deleteLeave(${leave.id})">Delete</button>` : ''}
+                </td>
             </tr>
         `).join('');
     } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">Failed to load: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Failed to load: ${err.message}</td></tr>`;
+    }
+}
+
+async function deleteLeave(id) {
+    if (!confirm('Are you sure you want to delete this leave application?')) return;
+    
+    try {
+        await apiFetch(`/leave/${id}`, { method: 'DELETE' });
+        loadLeaveHistory();
+    } catch (err) {
+        alert('Failed to delete: ' + err.message);
     }
 }

@@ -126,4 +126,30 @@ router.put('/:id/review', authenticateToken, requireRole(['faculty', 'hod', 'adm
     }
 });
 
+// Delete a leave application (only by creator)
+router.delete('/:id', authenticateToken, requireRole(['student', 'admin']), async (req, res) => {
+    try {
+        const { id } = req.params;
+        let query = 'DELETE FROM leave_requests WHERE id = $1 AND student_id = $2 RETURNING *';
+        let params = [id, req.user.id];
+
+        // Admin can delete any
+        if (req.user.role === 'admin') {
+            query = 'DELETE FROM leave_requests WHERE id = $1 RETURNING *';
+            params = [id];
+        }
+
+        const result = await pool.query(query, params);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Leave application not found or unauthorized' });
+        }
+
+        res.json({ message: 'Leave application deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 module.exports = router;
